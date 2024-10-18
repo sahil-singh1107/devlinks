@@ -10,8 +10,10 @@ app.use(express.json())
 
 
 const {userRouter} = require("./routes/user")
+const {linkRouter} = require("./routes/link")
 
 app.use("/api/v1/user", userRouter)
+app.use("/api/v1/link", linkRouter)
 
 async function main() {
     try {

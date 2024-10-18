@@ -7,7 +7,6 @@ import axios from 'axios';
 import gitlab from "../public/images/icon-gitlab.svg"
 import Link from 'next/link';
 
-const url = `http://localhost:5000/api/v1/link/getLinks`;
 
 const LinkForm = () => {
     const [links, setLinks] = useState([]);
@@ -23,7 +22,7 @@ const LinkForm = () => {
             if (clerkId) {
                 try {
                    
-                    const response = await axios.post(url, { clerkId });
+                    const response = await axios.post(process.env.NEXT_PUBLIC_GET_LINKS, { clerkId });
                     
                     // Check if response.data is an array
                     

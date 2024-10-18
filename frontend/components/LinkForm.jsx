@@ -9,7 +9,6 @@ import github from "../public/images/icon-github.svg"
 import axios from 'axios';
 import { useUser } from '@clerk/clerk-react'
 
-const url = "http://localhost:5000/api/v1/link/createLink"
 
 const LinkForm = () => {
     // Handler for adding a new link
@@ -50,7 +49,7 @@ const LinkForm = () => {
             return;
         }
 
-        const res = await axios.post(url, {
+        const res = await axios.post(process.env.NEXT_PUBLIC_CREATE_LINK_URL, {
             platform: selectedOption,
             link: link,
             clerkId: clerkId

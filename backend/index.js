@@ -8,6 +8,11 @@ const dbUrl = process.env.DATABASE_URL;
 
 app.use(express.json())
 
+
+const {userRouter} = require("./routes/user")
+
+app.use("/api/v1/user", userRouter)
+
 async function main() {
     try {
       await mongoose.connect(dbUrl);
@@ -21,4 +26,4 @@ async function main() {
     }
   }
   
-  main()
+  main()    

@@ -1,8 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import logo from '../public/images/logo-devlinks-large.svg';
+import logo from "../public/images/logo-devlinks-large.svg"
 import linkImage from '../public/images/icon-link.svg';
-import profileDetails from '../public/images/icon-profile-details-header.svg';
 import { UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {

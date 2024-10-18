@@ -16,7 +16,7 @@ const page = () => {
           <div className='w-1/2'>
             <LinksScreen />
           </div>
-          <div className='w-1/2'>
+          <div className='w-3/4'>
             <LinkForm />
           </div>
         </div>

@@ -17,11 +17,13 @@ const LinkForm = () => {
     const [link, setLink] = useState(null)
     const [selectedOption, setSelectedOption] = useState("GitHub");
     const [currUrl, setCurrUrl] = useState(github)
+    const [error, setError] = useState('')
 
-    const {user, isSignedIn} = useUser()
+    const { user, isSignedIn } = useUser()
     let clerkId;
     if (isSignedIn) {
         clerkId = user?.id
+        //console.log(clerkId)
     }
 
     const handleAddNewLink = () => {
@@ -33,7 +35,21 @@ const LinkForm = () => {
         if (fields > 0) setFields(prev => prev - 1)
     }
 
-    const handleSave = async () => {
+    const handleSave = async (e) => {
+        e.preventDefault()
+
+        setError('')
+
+        if (!link) {
+            setError("Can't be empty")
+            return;
+        }
+
+        if (!link.includes(selectedOption.toLocaleLowerCase())) {
+            setError('Please check the url')
+            return;
+        }
+
         const res = await axios.post(url, {
             platform: selectedOption,
             link: link,
@@ -83,11 +99,18 @@ const LinkForm = () => {
                                         <label className='text-[#737372] mb-2'>Platform</label>
                                         <Dropdown selectedOption={selectedOption} setSelectedOption={setSelectedOption} currUrl={currUrl} setCurrUrl={setCurrUrl} />
                                     </div>
-                                    <div className='flex flex-col'>
+                                    <div className='flex flex-col border p-2'>
                                         <label className='text-[#737372] mt-2'>Link</label>
-                                        <div className='flex mt-3'>
-                                            <Image src={linkIcon} />
-                                            <input type='text' placeholder={link ? link : "Add Link"} className='h-10 rounded-sm p-3 w-full hover:border hover:border-[#7550fe] focus-visible:border-[#7550fe]' value={link} onChange={(e) => setLink(e.target.value)} />
+                                        <div className='flex mt-3 space-x-2'>
+                                            <div className={`relative w-full ${error && 'border border-rose-500'}`}>
+                                                <Image src={linkIcon} className='absolute left-3 top-1/2 transform -translate-y-1/2' />
+                                                <input type='text' placeholder={link ? link : "Add Link"} className='h-10 rounded-sm p-3 pl-10 w-[80%] hover:border hover:border-[#7550fe] focus-visible:border-[#7550fe]' value={link} onChange={(e) => setLink(e.target.value)} />
+                                            </div>
+                                            <div>
+                                                {error && (
+                                                    <p className='text-sm ml-5 text-rose-500'>{error}</p>
+                                                )}
+                                            </div>
                                         </div>
 
                                     </div>
@@ -100,7 +123,7 @@ const LinkForm = () => {
                 </div>
 
                 <div className='absolute bottom-4 right-4'>
-                    <button onClick={handleSave} className='bg-[#633bff] pl-5 pr-5 pt-2 pb-2 rounded-md text-white'>
+                    <button onClick={(e) => handleSave(e)} className='bg-[#633bff] pl-5 pr-5 pt-2 pb-2 rounded-md text-white'>
                         Save
                     </button>
                 </div>

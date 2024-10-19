@@ -6,7 +6,7 @@ const {createLink ,getLinks} = require("../controllers/linkController")
 const linkRouter = express.Router()
 
 function middleware (req,res,next) {
-    console.log(req);
+    //console.log(req);
     next();
 }
 

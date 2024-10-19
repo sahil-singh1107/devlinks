@@ -54,7 +54,7 @@ const LinkForm = () => {
             link: link,
             clerkId: clerkId
         });
-        console.log(res);
+        //console.log(res);
     }
 
     return (

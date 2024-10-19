@@ -1,7 +1,7 @@
 const { linkModel } = require("../db")
 
 async function createLink(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     const { platform, link, clerkId } = req.body
 
     try {
@@ -30,7 +30,7 @@ async function getLinks(req, res) {
     // Destructure clerkId from the request parameters
     const { clerkId } = req.body;
 
-    console.log(clerkId); // Log the clerkId for debugging
+    //console.log(clerkId); // Log the clerkId for debugging
 
     try {
         // Query the database for links associated with the clerkId
@@ -42,7 +42,7 @@ async function getLinks(req, res) {
         // }
 
         // Return the found links with a 200 status
-        console.log(links)
+        //console.log(links)
         return res.send(links)
         
     } catch (error) {

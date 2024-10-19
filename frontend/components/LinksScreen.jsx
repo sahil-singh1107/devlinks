@@ -146,7 +146,7 @@ const LinkForm = () => {
             window.open(`/linktree/${linkTreeName || shortName}`, '_blank');
         }
     }
-    console.log(linkTreeName)
+    //console.log(linkTreeName)
 
     const handleDragStart = (index) => {
         setDraggedIndex(index);

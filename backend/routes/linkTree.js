@@ -9,9 +9,9 @@ linkTreeRouter.post("/getLinkTree", async function (req,res) {
 
     try {
         const result = await linkTreeModel.find({username});
-        console.log(result[0])
+        //console.log(result[0])
         const data = [result[0].userLinks, result[0].imageUrl]
-        console.log(data);
+        //console.log(data);
         res.status(200).send(data);
     } catch (error) {
         console.log("Error", error)

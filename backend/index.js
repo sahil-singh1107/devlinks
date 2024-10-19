@@ -6,9 +6,15 @@ var cors = require('cors')
 const dotenv = require('dotenv');
 dotenv.config();
 const dbUrl = process.env.DATABASE_URL;
+const path = require("path")
+
+const _dirname = path.resolve();
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
 app.use(express.urlencoded({ extended: true }));
 
 const {linkRouter} = require("./routes/link")
@@ -16,6 +22,11 @@ const {linkTreeRouter} = require("./routes/linkTree")
 
 app.use("/api/v1/link", linkRouter)
 app.use("/api/v1/linkTree", linkTreeRouter)
+
+app.use(express.static(path.join(_dirname, "/frontend/.next/server/app/page.js")))
+app.get('*', (req,res) => {
+  res.sendFile(path.resolve(_dirname, "frontend", ".next", "server/app/page.js"))
+})
 
 async function main() {
     try {

@@ -1,19 +1,21 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
-const port = 3000
+const port = 5000
+var cors = require('cors')
 const dotenv = require('dotenv');
 dotenv.config();
 const dbUrl = process.env.DATABASE_URL;
 
 app.use(express.json())
+app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 
-
-const {userRouter} = require("./routes/user")
 const {linkRouter} = require("./routes/link")
+const {linkTreeRouter} = require("./routes/linkTree")
 
-app.use("/api/v1/user", userRouter)
 app.use("/api/v1/link", linkRouter)
+app.use("/api/v1/linkTree", linkTreeRouter)
 
 async function main() {
     try {

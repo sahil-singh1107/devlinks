@@ -1,25 +1,17 @@
-const { linkModel, userModel } = require("../db")
+const { linkModel } = require("../db")
 
-async function createLink (req,res) {
-    const {platform, link} = req.body
-    const user = req.user
-
-    if (!link.includes(platform) || !link) {
-        return res.status(400).json({
-            message: "Please check the url",
-            success: false
-        })
-    }
+async function createLink(req, res) {
+    console.log(req.body);
+    const { platform, link, clerkId } = req.body
 
     try {
-        const findUser = await userModel.findOne({email: user.email})
-        console.log(findUser)
-
         await linkModel.create({
             platform,
             link,
-            creatorId: findUser._id
+            clerkId
         })
+
+        //console.log(res)
 
         return res.status(201).json({
             message: "Added sucessfully",
@@ -34,27 +26,32 @@ async function createLink (req,res) {
     }
 }
 
-async function  getLinks (req,res) {
-    const user = req.user
-    console.log(user)
+async function getLinks(req, res) {
+    // Destructure clerkId from the request parameters
+    const { clerkId } = req.body;
+
+    console.log(clerkId); // Log the clerkId for debugging
+
     try {
-        const findUser = await userModel.findOne({email: user.email})
+        // Query the database for links associated with the clerkId
+        const links = await linkModel.find({ clerkId });
+
+        // If no links are found, respond with a 404 status
+        // if (!links || links.length === 0) {
+        //     return res.status(404).json({ message: "No links found for this clerk ID." });
+        // }
+
+        // Return the found links with a 200 status
+        console.log(links)
+        return res.send(links)
         
-        const response = await linkModel.find({creatorId: findUser._id});
-
-        const links = response.map(element => {
-            return { platform: element.platform, link: element.link };
-        });
-       
-
-        return res.status(200).json({
-            message: "",
-            links
-        })
-
     } catch (error) {
-        
+        //console.error("Error fetching links:", error.message); // Log the error
+
+        // Respond with a 500 status for server errors
+        return res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
 }
 
-module.exports = {createLink, getLinks}
+
+module.exports = { createLink, getLinks }

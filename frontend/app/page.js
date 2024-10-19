@@ -12,7 +12,7 @@ const page = () => {
   return (
       <div>
         <Navbar />
-        <div className='flex flex-row h-screen overflow-y-hidden'>
+        <div className='flex flex-row h-screen overflow-y-hidden mt-9'>
           <div className='w-1/2 hidden lg:block lg:max-w-[769px] lg:max-h-[898px]'>
             <LinksScreen />
           </div>

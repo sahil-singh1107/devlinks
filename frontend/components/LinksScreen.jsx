@@ -61,7 +61,7 @@ const LinkForm = () => {
                 </p>
                 <div className='absolute top-[217px] left-[29%]'>
                     {links.map((ele, _) => (
-                        <Link href={ele.link}>
+                        <Link href={`//${ele.link}`}>
                              <Image src={gitlab} alt='ffs' className='mb-12' />
                         </Link>
                     ))}

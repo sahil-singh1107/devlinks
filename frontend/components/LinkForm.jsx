@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import empty from "../public/images/illustration-empty.svg";
 import Image from 'next/image';
 import 'react-dropdown/style.css';

@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.10.3",
     "@clerk/nextjs": "^5.7.5",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
+    "framer-motion": "^11.11.9",
     "next": "14.2.15",
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",

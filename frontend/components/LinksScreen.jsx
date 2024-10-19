@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import phonemockup from "../public/images/illustration-phone-mockup.svg";
 import Image from 'next/image';
 import { UserButton } from '@clerk/nextjs';
@@ -7,7 +7,6 @@ import axios from 'axios';
 import gitlab from "../public/images/icon-gitlab.svg"
 import Link from 'next/link';
 import { uniqueNamesGenerator, adjectives, colors, animals, starWars, NumberDictionary } from 'unique-names-generator';
-import { useRouter } from 'next/navigation';
 
 const url = "http://localhost:5000/api/v1/linkTree/createLinkTree"
 
@@ -29,9 +28,7 @@ const LinkForm = () => {
                 try {
 
                     const response = await axios.post(process.env.NEXT_PUBLIC_GET_LINKS, { clerkId });
-
                     // Check if response.data is an array
-
                     // Create a unique set of links
                     const newLinks = response.data.map(ele => ({
                         platform: ele.platform,

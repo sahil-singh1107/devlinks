@@ -1,5 +1,6 @@
 import { ClerkProvider, SignedIn, SignedOut, SignIn } from "@clerk/nextjs";
 import "./globals.css";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,16 +10,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>
-          <SignedOut>
-            <SignIn routing="hash" />
-          </SignedOut>
-          <SignedIn>
-            {children}
-          </SignedIn>
-        </body>
-      </html>
+        <html lang="en">
+          <body>
+            <SignedOut>
+              <SignIn routing="hash" />
+            </SignedOut>
+            <SignedIn>
+              {children}
+            </SignedIn>
+          </body>
+        </html>
+      
     </ClerkProvider>
   );
 }

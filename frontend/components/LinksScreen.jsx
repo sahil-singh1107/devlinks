@@ -103,15 +103,14 @@ const LinkForm = () => {
                 try {
 
                     const response = await axios.post(process.env.NEXT_PUBLIC_GET_LINKS, { clerkId });
-                    // Check if response.data is an array
-                    // Create a unique set of links
+                    
                     const newLinks = response.data.map(ele => ({
                         platform: ele.platform,
                         link: ele.link,
                         imageUrl: gitlab
                     }));
 
-                    // Filter out duplicates based on platfor   
+                 
 
                     setLinks(prevLinks => [...prevLinks, ...newLinks]);
 
@@ -125,7 +124,7 @@ const LinkForm = () => {
 
     const userButtonAppearance = {
         elements: {
-            userButtonAvatarBox: "w-20 h-20", // Custom width and height
+            userButtonAvatarBox: "w-20 h-20", 
         },
     };
 
@@ -143,7 +142,7 @@ const LinkForm = () => {
         } catch (error) {
             console.log(error);
         } finally {
-            // Redirect after ensuring linkTreeName has been set correctly
+            
             window.open(`/linktree/${linkTreeName || shortName}`, '_blank');
         }
     }
@@ -156,14 +155,14 @@ const LinkForm = () => {
     const handleDrop = (index) => {
         if (draggedIndex === null || draggedIndex === index) return;
 
-        // Swap positions of dragged link and the target link
+        
         const updatedLinks = [...links];
         const draggedLink = updatedLinks[draggedIndex];
         updatedLinks[draggedIndex] = updatedLinks[index];
         updatedLinks[index] = draggedLink;
 
         setLinks(updatedLinks);
-        setDraggedIndex(null); // Reset draggedIndex after drop
+        setDraggedIndex(null); 
     };
 
     function getLink(platform) {
@@ -183,7 +182,7 @@ const LinkForm = () => {
             <div className='absolute top-[115px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10'>
                 <UserButton appearance={userButtonAppearance} />
                 <p className='absolute top-[112px] left-[27%] text-red-800 font-bold text-xs'>
-                    {user?.firstName?.toUpperCase() || "User"} {/* Fallback if firstName is not available */}
+                    {user?.firstName?.toUpperCase() || "User"} 
                 </p>
                 <div className='absolute w-[240px] top-[300px] mt-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10'>
                     {links.map((ele, index) => (
@@ -191,7 +190,7 @@ const LinkForm = () => {
                             key={index}
                             draggable
                             onDragStart={() => handleDragStart(index)}
-                            onDragOver={(e) => e.preventDefault()} // Allow drop
+                            onDragOver={(e) => e.preventDefault()}
                             onDrop={() => handleDrop(index)}
                             className={`cursor-move ${colorClasses[ele.platform]} flex mb-7 rounded-md`}
                         >

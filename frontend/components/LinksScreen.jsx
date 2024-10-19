@@ -18,7 +18,7 @@ import frontendmentor from "../public/images/icon-frontend-mentor.svg"
 import hashnode from "../public/images/icon-hashnode.svg"
 import arrow from "/public/images/icon-arrow-right.svg"
 
-const url = "http://localhost:5000/api/v1/linkTree/createLinkTree"
+const url = process.env.NEXT_PUBLIC_CREATE_LINK_TREE
 
 const LinkForm = () => {
     const [links, setLinks] = useState([]);

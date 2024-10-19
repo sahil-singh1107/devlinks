@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import clipboard from "/public/images/icon-link-copied-to-clipboard.svg";
 import Image from 'next/image';
 
-const url = "http://localhost:5000/api/v1/linkTree/getLinkTree";
+const url = process.env.NEXT_PUBLIC_GET_LINK_TREE
 
 const Page = ({ params }) => {
   const username = params.username;

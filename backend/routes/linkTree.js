@@ -20,16 +20,48 @@ linkTreeRouter.post("/getLinkTree", async function (req,res) {
 })
 
 linkTreeRouter.post("/createLinkTree", async function(req,res) {
-    const {username, links, imageUrl} = req.body
+    const {username, links, imageUrl, clerkId} = req.body
+
+    if (!username || !links || !imageUrl || !clerkId) {
+        return res.status(500);
+    }
 
     try {
-        await linkTreeModel.create({username, userLinks: links, imageUrl})
+        await linkTreeModel.create({username, userLinks: links, imageUrl, clerkId})
 
         return res.status(201).json({message: "link tree created"})
     } catch (error) {
         console.log("Error", err)
         return res.status(500).json({message: "Internal Server Error"})
     }
+})
+
+linkTreeRouter.post("/getAllLinkTrees", async function(req,res) {
+    const {clerkId} = req.body;
+
+    try {
+        const result = await linkTreeModel.find({clerkId});
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log("Error", error)
+        return res.status(500).json({message: "Internal Server Error"})
+    }
+})
+
+linkTreeRouter.post("/deleteLinkTree", async function (req,res) {
+    const {clerkId, username} = req.body
+    console.log(req.body);
+    if (!clerkId) return res.status(500);
+
+    try {   
+        await linkTreeModel.deleteOne({clerkId, username})
+        return res.status(200);
+    } catch (error) {
+        console.log(error)
+        return res.status(500);
+    }
+
+    
 })
 
 module.exports = {linkTreeRouter: linkTreeRouter}

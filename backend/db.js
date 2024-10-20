@@ -10,6 +10,7 @@ const linkSchema = new Schema ({
 const linkTreeSchema = new Schema ({
     username: String,
     imageUrl: String,
+    clerkId: String,
     userLinks: [],
 })
 

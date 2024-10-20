@@ -27,6 +27,9 @@ Build with nextjs, devlinks lets users sign in through google or github and crea
 
 👉 **Onboarding Flow**: Seamless user registration and setup process.
 
+👉 **Create Link Trees**: Create link trees for your profile and share them with the world
+
+👉 **Dashboard**: Delete or Visit your link trees in the dashboard
 
 
 ## <a name="quick-start">🤸 Quick Start</a>
